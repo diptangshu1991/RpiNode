@@ -2,12 +2,31 @@
 <html>
     <head>
        <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+<script src="js/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("form").submit(function(e){
+       
+ e.preventDefault();
+    $.ajax({
+        url: '/process_get',
+        type: 'post',
+        dataType: 'text',
+        data: $('#form').serialize(),
+        success: function(data) {
+                  $("#sp").html(data);
+                 }
+    });
+
+    });
+});
+</script>
     </head>
 <body>
     <div class="container">
   <h2>RASPBERRY PI 2</h2>
   <p>This is a Demo project using Node.JS, EXPRESS, BOOTSTRAP and RASPBIAN as OS</p>
-  <form role="form" action="https://gyro-diptangshu1991.c9users.io/process_get" method="GET">
+  <form role="form" id="form">
     <div class="form-group">
       <label for="value1">Value:</label>
       <input type="text" class="form-control" id="value1" name="value1" placeholder="Enter value">
@@ -15,6 +34,12 @@
     
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
+  
+  
+  <div>
+      <h3>Status: <span class="badge" id=sp></span></h3>
+       <button type="button" id="search" class="btn btn-primary">Check</button>
+    </div>
 </div>
     
     
